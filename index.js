@@ -9,6 +9,7 @@ const Koa = require('koa');
 const fs = require('fs');
 const app = new Koa();
 const send = require('koa-send');
+const cors = require('@koa/cors');
 
 // log requests
 
@@ -44,6 +45,8 @@ app.use(async function (ctx, next) {
 app.use(async (ctx) => {
   await send(ctx, ctx.path, { root: __dirname + '/storage' });
 });
+
+app.use(cors());
 
 // listen
 
