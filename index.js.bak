@@ -51,10 +51,8 @@ app.use(async (ctx) => {
 
 // SSL options
 var options = {
-    key: fs.readFileSync('/etc/ssl/private.key'),
-    cert: fs.readFileSync('/etc/ssl/certificate.crt')
-    //key: fs.readFileSync('/etc/apache2/server.key'),  //ssl文件路径
-    //cert: fs.readFileSync('/etc/apache2/server.cer')  //ssl文件路径
+    key: fs.readFileSync('/etc/apache2/server.key'),  //ssl文件路径
+    cert: fs.readFileSync('/etc/apache2/server.cer')  //ssl文件路径
 };
 
 // listen
