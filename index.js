@@ -30,13 +30,14 @@ app.use(async function (ctx, next) {
 
   const { img } = ctx.request.body;
   try {
-    const filePath = `storage/${Date.now().toString() + Math.random().toString(36).substring(2)}.${img.split('data:image/').pop().split(';base64,')[0]}`;
+    const filePath = `../MontherCard/card/${Date.now().toString() + Math.random().toString(36).substring(2)}.${img.split('data:image/').pop().split(';base64,')[0]}`;
     fs.writeFile(filePath, img.split(';base64,').pop(), 'base64', (err) => {
       if (err) {
         ctx.throw(500, 'Internal Server Error');
       }
     });
-    const url = ctx.request.href + filePath.split('storage/').pop();
+    // const url = ctx.request.href + filePath.split('card/').pop();
+    const url = filePath.split('card/').pop();
     ctx.body = { url };
   } catch (error) {
     ctx.throw(403, 'Illegal Img');
@@ -46,7 +47,8 @@ app.use(async function (ctx, next) {
 // handle downloads
 
 app.use(async (ctx) => {
-  await send(ctx, ctx.path, { root: __dirname + '/storage' });
+  // await send(ctx, ctx.path, { root: __dirname + '/storage' });
+  await send(ctx, ctx.path, { root: __dirname + '../MontherCard/card' });
 });
 
 // SSL options
